@@ -29,11 +29,11 @@ INSERT INTO mining_site (name, resource_type_id, region_id, location, descriptio
 ('Zazafotsy', 1, 2, ST_SetSRID(ST_MakePoint(46.95, -23.10), 4326), 'Gisement de saphir corindon à Ihorombe'),
 ('Ikalamavony', 9, 2, ST_SetSRID(ST_MakePoint(46.70, -22.55), 4326), 'Tourmaline, grenat dans pegmatite artisanale'),
 ('Sakaraha', 1, 3, ST_SetSRID(ST_MakePoint(44.53, -22.90), 4326), 'Extraction de saphirs et ressources hydrocarbures'),
-('Irondro', 1, 4, ST_SetSRID(ST_MakePoint(48.08, -21.88), 4326), 'Exploitation artisanale d’émeraude'),
+('Irondro', 1, 4, ST_SetSRID(ST_MakePoint(48.08, -21.88), 4326), 'Exploitation artisanale d''émeraude'),
 ('Andranondambo', 1, 6, ST_SetSRID(ST_MakePoint(46.85, -25.02), 4326), 'Réserve majeure de saphirs découverte en 1995'),
 ('Molo', 1, 3, ST_SetSRID(ST_MakePoint(45.00, -23.13), 4326), 'Projet NextSource de graphite de batterie'),
-('QMM', 2, 6, ST_SetSRID(ST_MakePoint(47.00, -25.03), 4326), 'Extraction industrielle d’ilménite, zircon et rutile'),
-('Tranomaro', 6, 6, ST_SetSRID(ST_MakePoint(46.87, -25.05), 4326), 'Ancien site d’uranium et thorium'),
+('QMM', 2, 6, ST_SetSRID(ST_MakePoint(47.00, -25.03), 4326), 'Extraction industrielle d''ilménite, zircon et rutile'),
+('Tranomaro', 6, 6, ST_SetSRID(ST_MakePoint(46.87, -25.05), 4326), 'Ancien site d''uranium et thorium'),
 ('Tsimiroro', 8, 3, ST_SetSRID(ST_MakePoint(45.86, -20.38), 4326), 'Gisement de pétrole lourd exploitable'),
 ('Sakoa', 7, 3, ST_SetSRID(ST_MakePoint(45.23, -22.37), 4326), 'Gisement de charbon à ciel ouvert');
 

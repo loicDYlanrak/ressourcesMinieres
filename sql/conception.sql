@@ -1,5 +1,7 @@
 CREATE DATABASE ressource_min;
 
+\c ressource_min;
+
 CREATE EXTENSION IF NOT EXISTS postgis;
 
 -- Table des types de ressources
