@@ -1,97 +1,72 @@
--- Type de ressource
-INSERT INTO resource_type (name, description, category) VALUES 
-('Saphir', 'Pierre précieuse bleue, variété de corindon', 'pierre_précieuse'),
-('Rubis', 'Pierre précieuse rouge, variété de corindon', 'pierre_précieuse');
+-- Données enrichies pour la base "ressource_min"
 
--- Région
+-- Types de ressources
+INSERT INTO resource_type (name, description, category) VALUES 
+('Graphite', 'Minéral de carbone, conducteur, utilisé dans les batteries', 'métal'),
+('Ilménite', 'Oxyde de titane et fer, source de dioxyde de titane', 'métal'),
+('Zircon', 'Silicate de zirconium, utilisé pour les céramiques', 'métal'),
+('Rutile', 'Forme de dioxyde de titane, pigment blanc', 'métal'),
+('Terres rares', 'Groupe de 17 éléments critiques pour la tech', 'métal'),
+('Uranium', 'Métal radioactif utilisé pour le nucléaire', 'métal'),
+('Charbon', 'Roche combustible fossile', 'terre'),
+('Pétrole', 'Hydrocarbure liquide fossile', 'terre'),
+('Tourmaline', 'Pierre semi-précieuse multicolore', 'pierre_précieuse'),
+('Grenat', 'Silicate de magnésium, fer ou aluminium', 'pierre_précieuse'),
+('Quartz', 'Cristal de silice très répandu', 'pierre_précieuse'),
+('Topaze', 'Pierre précieuse transparente ou colorée', 'pierre_précieuse');
+
+-- Régions administratives
 INSERT INTO administrative_region (name, code) VALUES 
-('Anosy', 'MG-AN'), 
-('Alaotra-Mangoro', 'MG-AL');
+('Diana', 'MG-D'),
+('Ihorombe', 'MG-IH'),
+('Atsimo-Andrefana', 'MG-AA'),
+('Vatovavy', 'MG-VV'),
+('Atsinanana', 'MG-AT'),
+('Fort-Dauphin', 'MG-TL');
 
 -- Sites d'exploitation
 INSERT INTO mining_site (name, resource_type_id, region_id, location, description) VALUES
-('Ilakaka', 1, 1, ST_SetSRID(ST_MakePoint(46.65, -22.68), 'L''un des plus grands gisements de saphir au monde'),
-('Didy', 2, 2, ST_SetSRID(ST_MakePoint(48.38, -17.90), 'Important gisement de rubis');
+('Zazafotsy', 1, 2, ST_SetSRID(ST_MakePoint(46.95, -23.10), 4326), 'Gisement de saphir corindon à Ihorombe'),
+('Ikalamavony', 9, 2, ST_SetSRID(ST_MakePoint(46.70, -22.55), 4326), 'Tourmaline, grenat dans pegmatite artisanale'),
+('Sakaraha', 1, 3, ST_SetSRID(ST_MakePoint(44.53, -22.90), 4326), 'Extraction de saphirs et ressources hydrocarbures'),
+('Irondro', 1, 4, ST_SetSRID(ST_MakePoint(48.08, -21.88), 4326), 'Exploitation artisanale d’émeraude'),
+('Andranondambo', 1, 6, ST_SetSRID(ST_MakePoint(46.85, -25.02), 4326), 'Réserve majeure de saphirs découverte en 1995'),
+('Molo', 1, 3, ST_SetSRID(ST_MakePoint(45.00, -23.13), 4326), 'Projet NextSource de graphite de batterie'),
+('QMM', 2, 6, ST_SetSRID(ST_MakePoint(47.00, -25.03), 4326), 'Extraction industrielle d’ilménite, zircon et rutile'),
+('Tranomaro', 6, 6, ST_SetSRID(ST_MakePoint(46.87, -25.05), 4326), 'Ancien site d’uranium et thorium'),
+('Tsimiroro', 8, 3, ST_SetSRID(ST_MakePoint(45.86, -20.38), 4326), 'Gisement de pétrole lourd exploitable'),
+('Sakoa', 7, 3, ST_SetSRID(ST_MakePoint(45.23, -22.37), 4326), 'Gisement de charbon à ciel ouvert');
 
--- Entreprises
-INSERT INTO mining_company (name, country_origin) VALUES 
-('Gemfields', 'Royaume-Uni'),
-('Madagascar Gemstones', 'Madagascar');
+-- Entreprises minières
+INSERT INTO mining_company (name, country_origin, company_type, website, description) VALUES 
+('NextSource Materials', 'Canada', 'Privée', NULL, 'Société minière spécialisée dans le graphite'),
+('Rio Tinto QMM', 'Royaume-Uni/Australie', 'Multinationale', NULL, 'Filiale de Rio Tinto opérant à Fort-Dauphin'),
+('Kraoma', 'Madagascar', 'Publique', NULL, 'Entreprise d''état opérant sur le chrome'),
+('PetroMada', 'Madagascar', 'Privée', NULL, 'Société malgache de pétrole'),
+('Lemur Resources', 'Australie', 'Exploration', NULL, 'Projet charbonnier Sakoa'),
+('Artisans locaux Ikalamavony', 'Madagascar', 'Artisanale', NULL, 'Petits exploitants de pierres semi-précieuses');
 
--- Liaisons
-INSERT INTO site_company VALUES 
-(1, 1, 'exploitation', '2010-01-01', NULL),
-(2, 2, 'exploitation', '2005-01-01', NULL);
+-- Liaison site-entreprise
+INSERT INTO site_company (site_id, company_id, relationship_type, start_date, end_date) VALUES
+(6, 1, 'exploitation', '2023-01-01', NULL),
+(7, 2, 'exploitation', '2009-01-01', NULL),
+(9, 4, 'exploration', '2010-01-01', NULL),
+(10, 5, 'prospection', '2008-01-01', NULL),
+(2, 6, 'artisanat', '2000-01-01', NULL);
 
--- Caractéristiques
+-- Caractéristiques des pierres précieuses
 INSERT INTO gemstone_characteristics (site_id, gem_type, clarity, color, hardness_mohs) VALUES
-(1, 'Saphir bleu', 'VS', 'Bleu moyen', 9.0),
-(2, 'Rubis', 'VVS', 'Rouge sang de pigeon', 9.0);
+(1, 'Saphir', 'VS', 'Bleu intense', 9.0),
+(2, 'Tourmaline fluoro-liddicoatite', 'VVS', 'Multicolore', 7.0),
+(4, 'Émeraude', 'SI', 'Vert profond', 7.5),
+(5, 'Saphir', 'VS', 'Bleu royal', 9.0);
 
--- Type de ressource
-INSERT INTO resource_type (name, description, category) VALUES 
-('Granit', 'Roche plutonique à structure grenue', 'pierre_construction'),
-('Marbre', 'Roche métamorphique dérivant du calcaire', 'pierre_construction');
-
--- Sites
-INSERT INTO mining_site (name, resource_type_id, region_id, location, description) VALUES
-('Ambatolampy', 3, 2, ST_SetSRID(ST_MakePoint(47.43, -19.38), 'Gisement de granit'),
-('Antsirabe', 4, 2, ST_SetSRID(ST_MakePoint(47.03, -19.87), 'Gisement de marbre');
-
--- Entreprises
-INSERT INTO mining_company (name, country_origin) VALUES 
-('Madagascar Granit', 'Madagascar'),
-('Stone Madagascar', 'France');
-
--- Liaisons
-INSERT INTO site_company VALUES 
-(3, 3, 'exploitation', '2000-01-01', NULL),
-(4, 4, 'exploitation', '1998-01-01', NULL);
-
--- Caractéristiques
-INSERT INTO construction_stone_characteristics (site_id, stone_type, density_kg_m3, compressive_strength_mpa) VALUES
-(3, 'Granit rose', 2650, 200),
-(4, 'Marbre blanc', 2700, 120);
-
--- Type de ressource
-INSERT INTO resource_type (name, description, category) VALUES 
-('Nickel', 'Métal de transition ductile et résistant', 'métal'),
-('Cobalt', 'Métal de transition utilisé dans les batteries', 'métal');
-
--- Sites
-INSERT INTO mining_site (name, resource_type_id, region_id, location, description) VALUES
-('Ambatovy', 5, 2, ST_SetSRID(ST_MakePoint(48.42, -18.85), 'Mine de nickel et cobalt'),
-('Taolagnaro', 6, 1, ST_SetSRID(ST_MakePoint(46.99, -25.03), 'Projet QMM Rio Tinto');
-
--- Entreprises
-INSERT INTO mining_company (name, country_origin) VALUES 
-('Ambatovy Joint Venture', 'Canada/Japon/Corée'),
-('Rio Tinto QMM', 'Royaume-Uni/Australie');
-
--- Liaisons
-INSERT INTO site_company VALUES 
-(5, 5, 'exploitation', '2012-01-01', NULL),
-(6, 6, 'exploitation', '2009-01-01', NULL);
-
--- Caractéristiques
+-- Caractéristiques des métaux
 INSERT INTO metal_characteristics (site_id, metal_type, ore_type, concentration) VALUES
-(5, 'Nickel', 'Latérite', 1.2),
-(5, 'Cobalt', 'Latérite', 0.1),
-(6, 'Ilménite', 'Sables minéralisés', 5.0);
-
--- Type de ressource
-INSERT INTO resource_type (name, description, category) VALUES 
-('Latérite', 'Sols riches en fer et aluminium', 'terre'),
-('Sols ferralitiques', 'Sols rouges des hautes terres', 'terre');
-
--- Sites
-INSERT INTO mining_site (name, resource_type_id, region_id, location, description) VALUES
-('Moramanga', 7, 2, ST_SetSRID(ST_MakePoint(48.20, -18.95), 'Zone de latérite nickelifère'),
-('Antsirabe', 8, 2, ST_SetSRID(ST_MakePoint(47.03, -19.87), 'Sols ferralitiques des hautes terres');
-
--- Caractéristiques
-INSERT INTO soil_characteristics (site_id, soil_type, ph_level, iron_content, aluminum_content) VALUES
-(7, 'Latérite', 5.5, 45.2, 25.8),
-(8, 'Ferralitique', 4.8, 32.1, 18.5);
-
-
+(6, 'Graphite', 'Cristallin', 12.0),
+(7, 'Ilménite', 'Sables côtiers', 60.0),
+(7, 'Zircon', 'Sables côtiers', 5.0),
+(7, 'Rutile', 'Sables côtiers', 4.5),
+(9, 'Pétrole', 'Bitumineux lourd', 6.5),
+(10, 'Charbon', 'Houille', 8.0),
+(8, 'Uranium', 'Minerai uranifère', 0.12);
